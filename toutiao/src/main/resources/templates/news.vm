@@ -1,0 +1,50 @@
+<html>
+<body>
+<pre>
+hello, vm
+
+value1: $!{value1}
+$!{value2}
+${value3}
+
+
+#foreach ($color in $colors)
+Color $!{foreach.index}/$!{foreach.count}: $!{color}
+#end
+
+#foreach($key in $map.keySet())
+Map $!{foreach.index}/$!{foreach.count}: $!{key} $map.get($key)
+#end
+
+#foreach($kv in $map.entrySet())
+Number $!{foreach.index}/$!{foreach.count}: $!{kv.key} $!{kv.value}
+#end
+
+$!{user.name}
+
+
+#set($title = "nowcoder")
+Include: #include("header.vm")<br>
+Parse: #parse("header.vm")
+
+#macro(render_color, $color, $index, $count)
+Color By Macro $index, $color, $count
+#end
+
+#foreach($color in $colors)
+    #render_color($color, $foreach.index, $foreach.count)
+#end
+
+
+#set($hello = "hello")
+#set($hworld1 = "$!{hello} world") ##只解析双引号内的变量
+#set($hworld2 = '$!{hello} world') ##不解析单引号内的变量
+$!{hello}
+$!{hworld1}
+$!{hworld2}
+
+$!{colors.size()}
+
+</pre>
+</body>
+</html>
